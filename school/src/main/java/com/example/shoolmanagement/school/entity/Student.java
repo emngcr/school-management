@@ -31,7 +31,6 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
 
-        
     }
     public int getId(){
         return id;
@@ -57,11 +56,11 @@ public class Student {
     }
     
     
-    public Teacher getTeachers(){
+    public Teacher getTeacher(){
         return teacher;
     }
-    public void setTeachers(Teacher teachers){
-        this.teacher = teachers;
+    public void setTeacher(Teacher teacher){
+        this.teacher = teacher;
     }
     
 }
