@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -90,5 +87,36 @@ public class AdminController {
         // use a redirect to prevent duplicate submissions
         return "redirect:/school/admin/adminStudentList";
     }
+    @PostMapping("/adminTeacherUpdate")
+    public String adminTeacherUpdate(@RequestParam("teacherId") int id , Model model){
 
+        Teacher teacher = teacherService.findByIdTeacher(id);
+
+        model.addAttribute("teacher",teacher);
+
+        return "teacher/teacher-form";
+    }
+
+    @PostMapping("/adminStudentUpdate")
+    public String adminStudentUpdate(@RequestParam("studentId") int id , Model model){
+
+        Student student = studentService.findByIdStudent(id);
+
+        model.addAttribute("student",student);
+
+        return "student/student-form";
+    }
+    @PostMapping("/adminStudentDelete")
+    public String adminStudentDelete(@RequestParam("studentId") int id){
+        studentService.deleteStudent(id);
+
+        return "redirect:/school/admin/adminStudentList";
+    }
+
+    @PostMapping("/adminTeacherDelete")
+    public String adminTeacherDelete(@RequestParam("teacherId") int id){
+        teacherService.deleteTeacher(id);
+
+        return "redirect:/school/admin/adminTeacherList";
+    }
 }

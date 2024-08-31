@@ -29,10 +29,28 @@
             </thead>
 
             <tbody>
-            <tr th:each="tempSchool : ${teacher}">
+            <tr th:each="tempTeacher : ${teacher}">
 
-                <td th:text="${tempSchool.firstName}" />
-                <td th:text="${tempSchool.lastName}" />
+                <td th:text="${tempTeacher.firstName}" />
+                <td th:text="${tempTeacher.lastName}" />
+                <td>
+                  <div class="row">
+                      <div class="col-small">
+                    <form action="#" th:action="@{/school/admin/adminTeacherUpdate}" method="POST">
+                        <input type="hidden" name="teacherId" th:value="${tempTeacher.id}">
+                        <button type="submit" class="btn btn-info btn-sm">Update</button>
+                    </form>
+
+                    <form action="#" th:action="@{/school/admin/adminTeacherDelete}" method="POST">
+                        <input type="hidden" name="teacherId" th:value="${tempTeacher.id}">
+                        <button type="submit" class="btn btn-danger btn-sm me-1"
+                                onclick="if (!(confirm('Are you sure you want to delete this teacher?'))) return false">
+                            Delete
+                        </button>
+                    </form>
+                  </div>
+                </div>
+                </td>
 
             </tr>
             </tbody>
