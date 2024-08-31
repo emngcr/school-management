@@ -15,7 +15,7 @@ public class Admin {
     private String lastName;
     
     public Admin(){
-        
+
     }
     public Admin(String firstName,String lastName){
         this.firstName = firstName;

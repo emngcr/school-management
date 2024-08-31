@@ -1,7 +1,9 @@
 package com.example.shoolmanagement.school.controller;
 
+import com.example.shoolmanagement.school.entity.Admin;
 import com.example.shoolmanagement.school.entity.Student;
 import com.example.shoolmanagement.school.entity.Teacher;
+import com.example.shoolmanagement.school.service.AdminService;
 import com.example.shoolmanagement.school.service.StudentService;
 import com.example.shoolmanagement.school.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +18,25 @@ import java.util.List;
 @RequestMapping("/school/admin")
 public class AdminController {
 
-   // private AdminService adminService;
+
     private StudentService studentService;
     private TeacherService teacherService;
 
+    private AdminService adminService;
 
 
-    public AdminController(TeacherService teacherService ,StudentService studentService){
+    public AdminController(TeacherService teacherService ,StudentService studentService,AdminService adminService){
        this.teacherService = teacherService;
        this.studentService = studentService;
+       this.adminService = adminService;
     }
 
+    @GetMapping("/adminpanel")
+    public String adminPanel(Model model){
+        List<Admin> admins = adminService.adminList();
+        model.addAttribute("admin",admins);
+        return "admin";
+    }
 
     @GetMapping("/adminTeacherList")
     public String adminLTeacherList(Model model){

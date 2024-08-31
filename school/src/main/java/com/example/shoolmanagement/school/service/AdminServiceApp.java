@@ -1,5 +1,6 @@
 package com.example.shoolmanagement.school.service;
 
+import com.example.shoolmanagement.school.entity.Admin;
 import com.example.shoolmanagement.school.entity.Student;
 import com.example.shoolmanagement.school.entity.Teacher;
 import com.example.shoolmanagement.school.repository.AdminRepository;
@@ -12,89 +13,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-/*
 
+@Service
 public class AdminServiceApp implements AdminService{
 
-    private TeacherRepository teacherRepository;
-    private StudentRepository studentRepository;
+    private AdminRepository adminRepository;
 
     @Autowired
-    public AdminServiceApp(){
-
-    }
-
-    @Autowired
-    public AdminServiceApp(TeacherRepository theTeacherRepository){
-        this.teacherRepository = theTeacherRepository;
-    }
-
-    @Autowired
-    public AdminServiceApp(StudentRepository studentRepository){
-       this.studentRepository = studentRepository;
-    }
-    @Override
-    public List<Teacher> findAllTeachers() {
-        return teacherRepository.findAll();
-
+    public AdminServiceApp(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
     }
 
     @Override
-    public List<Student> findAllStudents() {
-        return studentRepository.findAll();
+    public List<Admin> adminList() {
+       return adminRepository.findAll();
     }
 
     @Override
-    public Teacher findByIdTch(int theID) {
-        Optional<Teacher> result = teacherRepository.findById(theID);
-
-        Teacher teacher  = null;
-
-        if(result.isPresent()){
-            teacher = result.get();
-        }
-        else{
-            throw new RuntimeException("Dont find Teacher ID - "+theID);
-        }
-        return teacher;
+    public void saveAdmin(Admin admin) {
+            adminRepository.save(admin);
     }
-
-    @Override
-    public Student findByIdSt(int theID) {
-        Optional<Student> result = studentRepository.findById(theID);
-
-        Student student  = null;
-
-        if(result.isPresent()){
-            student = result.get();
-        }
-        else{
-            throw new RuntimeException("Dont find Teacher ID - "+theID);
-        }
-        return student;
-    }
-
-    @Override
-    public void saveStudent(Student student) {
-            studentRepository.save(student);
-    }
-
-    @Override
-    public void saveTeacher(Teacher teacher) {
-        teacherRepository.save(teacher);
-    }
-
-    @Override
-    public void deleteStudent(int theId) {
-            // delete student by ID
-
-        studentRepository.deleteById(theId);
-
-    }
-    @Override
-    public void deleteTeacher(int theId) {
-        // delete teacher by ID
-        teacherRepository.deleteById(theId);
-
-    }
-}*/
+}
